@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Recipe Recommendation</title>
+    <style>
+        body {
+        background-color: khaki!important;
+        text-align: center !important;
+        margin: 40px !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        }
+        h1 {
+        margin-bottom:20px !important;
+        }
+        form{
+        margin-bottom: 20px !important;
+        }
+        ul{
+        list-style: none !important;
+        padding:0 !important;
+        }
+        li{
+        display: inline-block !important;
+        text-align:center!important;
+        margin: 10px!important;
+        width: 200px!important;
+        }
+        .recipe-title {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+        max-height: 3.6em !important;
+        overflow:hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: normal !important;
+        }
+
+
+
+        a{
+        display:inline-block !important;
+        margin-top: 10px !important;
+        color: blue !important;
+        text-decoration: underline !important;
+        }
+
+
+        .recipe-details{
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        border: 2px solid #ccc !important;
+        padding: 20px !important;
+        }
+        .section-title{
+        text-align: left !important;
+        margin-bottom: 10px !important;
+        }
+        .ingredient-list, .instruction-list{
+        text-align: left !important;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Header -->
+<nav class="navbar navbar-expand-md navbar-light">
+    <!-- Title -->
+    <div class="container py-3">
+        <a href="/" class="navbar-brand">
+        </a>
+        <!-- Navigation -->
+        <!-- Always display navigation links -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav ms-auto mt-2">
+            <li class="nav-item px-2"><a class="nav-link" href="/">HOME</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="/login">Log In</a></li>
+            <li class="nav-item px-2"><a class="nav-link" href="/register">Register</a></li>
+                 <li class="nav-item px-2"><a class="nav-link" href="/logout">Log Out</a></li>
+          </ul>
+        </div>
+    </div>
+</nav>
+
+
+<h1> Recipe Recommendation System</h1>
+<form method = "POST" action="/">
+    <input type="text" name="search_query" placeholder="Search for recipes">
+    <input type="submit" value="Get Recommendations">
+</form>
+
+   <div class="text-align: center;">
+
+        <h2 class="mb-3 fw-6 text-capitalize">Hello, Guest </h2>
+
+        <h5>Begin your health journey right here!</h5>
+    </div>
+{% if recipes%}
+<!--<h2> Results for "{{ search_query }}"</h2>-->
+<ul>
+    {% for recipe in recipes %}
+    <li>
+        <h3 class="recipe-title">{{ recipe.title }}</h3>
+        <a href="{{ url_for('view_recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
+    </li>
+    {% endfor %}
+</ul>
+<!--if no recipes are found-->
+{% else %}
+<p>.</p>
+{% endif %}
+</body>
+</html>

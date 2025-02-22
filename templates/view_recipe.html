@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatWise</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Link to your JavaScript file -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- Other head elements... -->
+    <title>{{ recipe.title }}</title>
+    <style>
+        body {
+        background-color: khaki!important;
+        text-align:center!important;
+        margin: 40px!important;
+        font-family: Arial, Helvetica, sans-serif!important;
+        }
+        h1,h2
+        {
+        margin-bottom: 20px!important;
+
+        }
+        ul, ol
+        {
+        text-align: left!important;
+        list-style-position: inside!important;
+        padding-left: 20px!important;
+        }
+
+
+
+        a
+        {
+        display: inline-block!important;
+        margin-top: 10px!important;
+        color: blue!important;
+        text-decoration: underline!important;
+        }
+        .recipe-details
+        {
+        max-width: 700px!important;
+        margin: 0 auto!important;
+        border: 2px solid #ccc!important;
+        padding: 20px!important;
+        }
+        .section-title
+        {
+        text-align: left!important;
+        margin-bottom: 10px!important;
+        }
+        .ingredient-list, .instruction-list{
+        text-align: left!important;
+        }
+    </style>
+
+</head>
+<body>
+<div class="recipe-details">
+    <h1>{{ recipe.title }}</h1>
+    <!-- Display the recipe image if available-->
+
+
+
+    <!-- Ingredients section -->
+    <h2 class="section-title"> Ingredients</h2>
+    <!--Create an unordered list for displaying the ingredients-->
+    <ul class="ingredients-list">
+        <!-- Loop through each ingredient in the recipe's extendedIngredients-->
+        {% for ingredients in recipe.extendedIngredients %}
+        <li>{{ ingredients.original }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Instruction Section-->
+    <h2 class="section-title">Instructions</h2>
+    <ol class="instruction-list">
+        {% for step in recipe.analyzedInstructions[0].steps %}
+        <li>{{ step.step }}</li>
+        {% endfor %}
+    </ol>
+
+
+    <!-- min information section -->
+
+
+
+    <a href="/?search_query={{ search_query }}">Back to search results</a>
+</div>
+</body>
+</html>
